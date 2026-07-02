@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EarnHub Ad</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="survey-page">
+        <header class="page-header">
+            <a href="index.html" class="nav-link">← Back to Dashboard</a>
+            <h1 class="section-title">EarnHub Spotlight</h1>
+            <p class="tasks-info">Watch this short 20-second message about EarnHub's smart savings and referral rewards.</p>
+        </header>
+
+        <section class="section" id="adIntro">
+            <div class="referral-page-card">
+                <h2>Quick EarnHub Ad</h2>
+                <p>EarnHub helps you grow savings, earn daily interest, and reward friends when they join and deposit.</p>
+                <p>Finish the 20-second ad and receive <strong>KSH 100</strong> straight to your wallet.</p>
+                <button class="btn-primary btn-large" id="startAdButton" onclick="startAd()">Start 20-second Ad</button>
+                <p id="countdownText" class="tasks-info hidden">Watching ad... <strong id="countdownValue">20</strong>s left</p>
+            </div>
+        </section>
+
+        <section class="section hidden" id="adCompleteSection">
+            <div class="referral-page-card">
+                <h2>Well done!</h2>
+                <p class="tasks-info">You've completed the EarnHub message and earned <strong>KSH 100</strong>.</p>
+                <button class="btn-primary btn-large" onclick="window.location.href='index.html'">Return to Dashboard</button>
+            </div>
+        </section>
+
+        <section class="section hidden" id="adErrorSection">
+            <div class="referral-page-card">
+                <h2>Unable to complete ad</h2>
+                <p class="tasks-info" id="adErrorMessage">Please login and try again.</p>
+                <button class="btn-secondary btn-large" onclick="window.location.href='index.html'">Back to Dashboard</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="ad.js"></script>
+</body>
+</html>
