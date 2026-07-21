@@ -1,2 +1,8 @@
 playwright
 werkzeug
+Flask
+flask-cors
+flask-jwt-extended
+playwright
+Werkzeug
+gunicorn
