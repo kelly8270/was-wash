@@ -1,5 +1,6 @@
 // ===== CONFIG =====
-const API_URL = 'https://was-washs.onrender.com/api';
+const DEFAULT_API_URL = 'https://was-washs.onrender.com/api';
+const API_URL = window.API_URL || DEFAULT_API_URL;
 
 // ===== STATE =====
 let currentUser = null;
@@ -129,16 +130,23 @@ async function register() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        const result = await res.json();
-        
+
+        let result = null;
+        try {
+            result = await res.json();
+        } catch {
+            result = { error: 'Server returned an invalid response.' };
+        }
+
         if (res.ok) {
             localStorage.removeItem('referrer');
             showToast('Registration successful! Please login.', 'success');
             switchAuth('login');
         } else {
-            showToast(result.error || 'Registration failed', 'error');
+            showToast(result?.error || 'Registration failed', 'error');
         }
     } catch (err) {
+        console.error('Registration failed', err);
         showToast('Network error. Please try again.', 'error');
     }
 }
@@ -155,8 +163,14 @@ async function login() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        const result = await res.json();
-        
+
+        let result = null;
+        try {
+            result = await res.json();
+        } catch {
+            result = { error: 'Server returned an invalid response.' };
+        }
+
         if (res.ok) {
             currentUser = result.user;
             localStorage.setItem('token', result.token);
@@ -166,9 +180,10 @@ async function login() {
             enterApp();
             showToast(`Welcome back, ${result.user.name}!`, 'success');
         } else {
-            showToast(result.error || 'Login failed', 'error');
+            showToast(result?.error || 'Login failed', 'error');
         }
     } catch (err) {
+        console.error('Login failed', err);
         showToast('Network error. Please try again.', 'error');
     }
 }
