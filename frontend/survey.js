@@ -1,4 +1,4 @@
-const API_URL = '/api';
+const API_URL = 'https://was-washs.onrender.com/api';
 
 function showToast(message, type = 'info') {
     const toast = document.getElementById('toast');

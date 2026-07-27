@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const API_URL = '/api';
+const API_URL = 'https://was-washs.onrender.com/api';
 
 // ===== STATE =====
 let currentUser = null;
