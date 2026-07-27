@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EarnHub Survey</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="survey-page">
+        <header class="page-header">
+            <a href="index.html" class="nav-link">← Back to Dashboard</a>
+            <h1 class="section-title">Quick Survey</h1>
+            <p class="tasks-info">Answer these 5 questions to earn KSH 100.</p>
+        </header>
+
+        <div id="notLoggedInMessage" class="section hidden">
+            <h2>Please login first</h2>
+            <p>You will be redirected to the login page in a moment.</p>
+        </div>
+
+        <section id="surveySection" class="section">
+            <form id="surveyForm" onsubmit="event.preventDefault(); submitSurvey();">
+                <label>1) How did you hear about EarnHub?</label>
+                <select id="q1" required>
+                    <option value="">Select</option>
+                    <option value="friend">Friend</option>
+                    <option value="social">Social Media</option>
+                    <option value="ad">Advertisement</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label>2) How easy was the signup process?</label>
+                <select id="q2" required>
+                    <option value="">Select</option>
+                    <option value="1">1 — Difficult</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 — Very easy</option>
+                </select>
+
+                <label>3) Which feature interests you most?</label>
+                <select id="q3" required>
+                    <option value="">Select</option>
+                    <option value="daily">Daily Earnings</option>
+                    <option value="referral">Referral Rewards</option>
+                    <option value="withdraw">Fast Withdrawals</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label>4) Would you recommend EarnHub to friends?</label>
+                <select id="q4" required>
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>
+                    <option value="maybe">Maybe</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label>5) Any suggestions? (optional)</label>
+                <textarea id="q5" rows="3" placeholder="Your feedback..."></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="window.location.href='index.html'">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Survey</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Rating section removed per request -->
+
+        <section id="thankYouSection" class="section hidden">
+            <h2>Thank You!</h2>
+            <p class="tasks-info">Your survey and rating are complete. You can now return to your dashboard.</p>
+            <button class="btn-primary btn-large" onclick="window.location.href='index.html'">Return to Dashboard</button>
+        </section>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="survey.js"></script>
+</body>
+</html>

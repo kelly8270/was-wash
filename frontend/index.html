@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarnHub - Daily Earnings Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg class="logo" role="img" aria-label="EarnHub logo" xmlns="http://www.w3.org/2000/svg" width="140" height="40" viewBox="0 0 120 40"><title>EarnHub</title><rect rx="6" width="120" height="40" fill="#2b6cb0"/><text x="60" y="25" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#fff" text-anchor="middle">EarnHub</text></svg>
+        </div>
+        <div class="nav-links">
+            <a href="#dashboard" class="nav-link active">Dashboard</a>
+            <a href="#deposit" class="nav-link">Deposit</a>
+            <a href="#invest" class="nav-link">Invest</a>
+            <a href="#tasks" class="nav-link">Earn</a>
+            <a href="#refer" class="nav-link">Refer</a>
+            <a href="#withdraw" class="nav-link">Withdraw</a>
+        </div>
+        <div class="user-info" id="userInfo" style="display: none;">
+            <span id="userBalance">KSH 0.00</span>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Trusted wealth growth</div>
+            <h1>Grow your income with smart investment plans</h1>
+            <p>Track deposits, unlock daily earnings, and keep every opportunity in one clear, confidence-building workspace.</p>
+            <div class="hero-actions">
+                <a href="#invest" class="btn-primary hero-btn">Explore Plans</a>
+                <a href="#deposit" class="btn-secondary hero-btn">Fund Account</a>
+            </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+            <div class="hero-visual-card">
+                <img src="images/package-12000.svg" alt="Investment growth illustration" class="hero-visual-image">
+                <div class="hero-visual-chip">Portfolio +12.4%</div>
+                <div class="hero-visual-number">KSH 15,000</div>
+                <p>Flexible returns with a clear 2-month maturity plan.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Section -->
+    <section id="auth" class="section auth-section">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuth('login', event)">Login</button>
+                <button class="auth-tab" onclick="switchAuth('register', event)">Register</button>
+            </div>
+            
+            <div id="loginForm" class="auth-form">
+                <h2>Welcome Back</h2>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button class="btn-primary" onclick="login()">Login</button>
+            </div>
+            
+            <div id="registerForm" class="auth-form hidden">
+                <h2>Create Account</h2>
+                <input type="text" id="regName" placeholder="Full Name" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+                <div class="password-guidelines">
+                    <p>Password must include:</p>
+                    <ul>
+                        <li>At least 8 characters</li>
+                        <li>One uppercase letter</li>
+                        <li>One lowercase letter</li>
+                        <li>One number</li>
+                        <li>One symbol (e.g. !@#$%)</li>
+                    </ul>
+                </div>
+                <input type="tel" id="regPhone" placeholder="Phone Number (e.g., 0712345678)" required>
+                <select id="regGender">
+                    <option value="">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="number" id="regAge" placeholder="Age" min="1" max="120">
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">
+                        I agree to the <button type="button" class="link-button" onclick="showTermsModal()">Terms and Conditions</button>
+                    </label>
+                </div>
+                <button class="btn-primary" onclick="register()">Register</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms and Conditions Modal -->
+    <div id="termsModal" class="modal hidden">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Terms and Conditions</h2>
+                <button class="modal-close" onclick="closeTermsModal()">&times;</button>
+            </div>
+            <div class="modal-body terms-body">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By creating an account on EarnHub, you agree to comply with and be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our platform.</p>
+
+                <h3>2. User Eligibility</h3>
+                <p>You must be at least 18 years old to use EarnHub. By registering, you represent and warrant that you are at least 18 years old and have the legal authority to enter into this agreement.</p>
+
+                <h3>3. Account Registration</h3>
+                <p>You are responsible for maintaining the confidentiality of your account information, including your password. You agree to accept responsibility for all activities that occur under your account. You must notify us immediately of any unauthorized use of your account.</p>
+
+                <h3>4. User Conduct</h3>
+                <p>You agree not to:</p>
+                <ul>
+                    <li>Engage in fraudulent activities or misrepresent your identity</li>
+                    <li>Violate any laws or regulations</li>
+                    <li>Attempt to hack or gain unauthorized access to our systems</li>
+                    <li>Share your account credentials with others</li>
+                    <li>Use automated tools or scripts to access the platform</li>
+                    <li>Engage in any form of abuse, harassment, or discrimination</li>
+                </ul>
+
+                <h3>5. Earnings and Payments</h3>
+                <p>All earnings displayed on EarnHub are estimates. Actual earnings may vary based on various factors including but not limited to task completion, engagement, and platform policies. We reserve the right to adjust earnings calculations at any time.</p>
+                <p>No investment losses will be accounted for; invest wisely. No investment is fully withdrawn before a period of 2 months. Investors can only withdraw their daily earning. After maturity date of 2 months then investors can withdraw full amount.</p>
+                <p>Payment processing may take 5-7 business days. EarnHub is not responsible for delays caused by your bank or payment provider. Payments will only be done on weekdays from 7pm to 9pm.</p>
+
+                <h3>6. Deposits and Withdrawals</h3>
+                <p>Deposits must be made through authorized payment methods only. Minimum deposit amounts may apply. Withdrawals are subject to verification and approval. We reserve the right to decline withdrawal requests that violate our policies.</p>
+                <p>Users who try to withdraw against limits, send a fake message, or provide an illegible referral code will be permanently banned from the platform and no refunding will be done.</p>
+
+                <h3>7. Referral Program</h3>
+                <p>Referral bonuses are awarded only when your referred user completes the verification process and meets our eligibility criteria. Referral rewards cannot be transferred or exchanged for other benefits.</p>
+
+                <h3>8. Intellectual Property</h3>
+                <p>All content on EarnHub, including text, graphics, logos, and software, is the property of EarnHub and protected by copyright laws.</p>
+
+                <h3>9. Limitation of Liability</h3>
+                <p>EarnHub is provided "as is" without warranties of any kind. We are not liable for any indirect, incidental, or consequential damages resulting from your use of the platform.</p>
+
+                <h3>10. Account Suspension</h3>
+                <p>We reserve the right to suspend or terminate your account if we detect fraudulent activity, violation of terms, or any activity that violates applicable laws.</p>
+
+                <h3>11. Privacy</h3>
+                <p>Your personal data is collected and processed in accordance with our Privacy Policy. By registering, you consent to our collection and use of your information as outlined in our Privacy Policy.</p>
+
+                <h3>12. Changes to Terms</h3>
+                <p>We may update these Terms and Conditions at any time. Continued use of EarnHub following any changes constitutes your acceptance of the new terms.</p>
+
+                <h3>13. Contact Us</h3>
+                <p>If you have questions about these Terms and Conditions, please contact us through the support section of the platform.</p>
+
+                <p style="margin-top: 20px; font-style: italic; color: #666;">Last Updated: June 2026</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="closeTermsModal()">I Accept and Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (Hidden until login) -->
+    <main id="app" class="hidden">
+        <!-- Dashboard -->
+        <section id="dashboard" class="section">
+            <div class="dashboard-shell">
+                <div class="dashboard-intro">
+                    <div>
+                        <p class="section-kicker">Investor Dashboard</p>
+                        <h1 class="section-title">Your portfolio, polished for growth</h1>
+                        <p class="section-copy">Review balances, move funds into smart packages, and keep every update in one clear workspace.</p>
+                    </div>
+                    <div class="dashboard-pill">Live balance • Secure growth</div>
+                </div>
+
+                <div class="dashboard-top-grid">
+                    <div class="dashboard-primary-card">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">Total Deposited</div>
+                                <div class="stat-value" id="totalDeposited">KSH 0</div>
+                            </div>
+                            <div class="stat-card highlight">
+                                <div class="stat-label">Daily Earnings (10%)</div>
+                                <div class="stat-value" id="dailyEarnings">KSH 0</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Total Earned</div>
+                                <div class="stat-value" id="totalEarned">KSH 0</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Available Balance</div>
+                                <div class="stat-value" id="availableBalance">KSH 0</div>
+                            </div>
+                        </div>
+
+                        <div class="insight-strip">
+                            <div class="insight-card">
+                                <span class="insight-title">Capital plan</span>
+                                <strong>Flexible packages from KSH 2,000 to KSH 15,000</strong>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-title">Growth pace</span>
+                                <strong>Daily rewards with a transparent two-month maturity cycle</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card featured-card">
+                        <div class="profile-card-header">
+                            <div>
+                                <h3>Your Profile</h3>
+                                <p>Account overview</p>
+                            </div>
+                            <span class="status-chip">Verified</span>
+                        </div>
+                        <div class="profile-visual">
+                            <img src="images/package-5000.svg" alt="Wealth growth illustration">
+                        </div>
+                        <div class="profile-row"><span>Name</span><span id="profileName">-</span></div>
+                        <div class="profile-row"><span>Email</span><span id="profileEmail">-</span></div>
+                        <div class="profile-row"><span>Phone</span><span id="profilePhone">-</span></div>
+                        <div class="profile-row"><span>Referral Code</span><span id="profileReferral">-</span></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom-grid">
+                    <div class="dashboard-main-stack">
+                        <div class="message-card">
+                            <h3>Support Messages</h3>
+                            <form id="messageForm" onsubmit="event.preventDefault(); sendMessage();">
+                                <div class="form-row">
+                                    <input type="text" id="messageSubject" placeholder="Subject" required>
+                                </div>
+                                <div class="form-row">
+                                    <textarea id="messageBody" placeholder="Write your message here..." rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">Send Message</button>
+                            </form>
+                            <div id="messageHistory" class="message-history">
+                                <h4>Recent Messages</h4>
+                                <div id="messageList"><p>No messages yet.</p></div>
+                            </div>
+                        </div>
+
+                        <div class="plan-showcase">
+                            <div class="showcase-header">
+                                <div>
+                                    <h3>Featured opportunities</h3>
+                                    <p>Move capital into premium plans with clear returns and a polished experience.</p>
+                                </div>
+                            </div>
+                            <div class="plan-showcase-grid">
+                                <div class="plan-card">
+                                    <img src="images/package-2000.svg" alt="Starter investment package">
+                                    <div class="plan-card-info">
+                                        <strong>Starter Plan</strong>
+                                        <p>From KSH 2,000</p>
+                                    </div>
+                                </div>
+                                <div class="plan-card">
+                                    <img src="images/package-5000.svg" alt="Basic investment package">
+                                    <div class="plan-card-info">
+                                        <strong>Basic Plan</strong>
+                                        <p>From KSH 5,000</p>
+                                    </div>
+                                </div>
+                                <div class="plan-card">
+                                    <img src="images/package-12000.svg" alt="Premium investment package">
+                                    <div class="plan-card-info">
+                                        <strong>Premium Plan</strong>
+                                        <p>From KSH 12,000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-side-stack">
+                        <div class="progress-section">
+                            <h3>Today's Progress</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                            </div>
+                            <p id="progressText">Complete tasks to unlock today's earnings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deposit Section -->
+        <section id="deposit" class="section hidden">
+            <h1 class="section-title">Make a Deposit</h1>
+            <p class="deposit-info">Send money via M-Pesa to: <strong class="mpesa-number">0769261471</strong></p>
+            <p class="deposit-subtitle">Choose your investment package:</p>
+            
+            <div class="deposit-packages">
+                <div class="package-card" onclick="selectPackage(2000)">
+                    <svg class="package-img" role="img" aria-label="Package KSH 2,000" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><title>Package KSH 2,000</title><circle cx="40" cy="40" r="36" fill="#f6ad55"/><text x="40" y="46" font-family="Arial" font-size="14" fill="#fff" text-anchor="middle">2,000</text></svg>
+                    <div class="package-amount">KSH 2,000</div>
+                    <div class="package-earnings">Earn KSH 200/day</div>
+                    <div class="package-badge">Starter</div>
+                </div>
+                <div class="package-card" onclick="selectPackage(5000)">
+                    <svg class="package-img" role="img" aria-label="Package KSH 5,000" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><title>Package KSH 5,000</title><rect x="4" y="4" width="72" height="72" rx="12" fill="#68d391"/><text x="40" y="46" font-family="Arial" font-size="14" fill="#fff" text-anchor="middle">5,000</text></svg>
+                    <div class="package-amount">KSH 5,000</div>
+                    <div class="package-earnings">Earn KSH 500/day</div>
+                    <div class="package-badge">Basic</div>
+                </div>
+                <div class="package-card" onclick="selectPackage(8000)">
+                    <svg class="package-img" role="img" aria-label="Package KSH 8,000" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><title>Package KSH 8,000</title><polygon points="40,6 74,70 6,70" fill="#63b3ed"/><text x="40" y="50" font-family="Arial" font-size="14" fill="#fff" text-anchor="middle">8,000</text></svg>
+                    <div class="package-amount">KSH 8,000</div>
+                    <div class="package-earnings">Earn KSH 800/day</div>
+                    <div class="package-badge">Standard</div>
+                </div>
+                <div class="package-card" onclick="selectPackage(12000)">
+                    <svg class="package-img" role="img" aria-label="Package KSH 12,000" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><title>Package KSH 12,000</title><rect x="4" y="4" width="72" height="72" rx="8" fill="#9f7aea"/><text x="40" y="46" font-family="Arial" font-size="12" fill="#fff" text-anchor="middle">12,000</text></svg>
+                    <div class="package-amount">KSH 12,000</div>
+                    <div class="package-earnings">Earn KSH 1,200/day</div>
+                    <div class="package-badge">Premium</div>
+                </div>
+                <div class="package-card" onclick="selectPackage(15000)">
+                    <svg class="package-img" role="img" aria-label="Package KSH 15,000" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><title>Package KSH 15,000</title><circle cx="40" cy="40" r="36" fill="#f56565"/><text x="40" y="46" font-family="Arial" font-size="12" fill="#fff" text-anchor="middle">15,000</text></svg>
+                    <div class="package-amount">KSH 15,000</div>
+                    <div class="package-earnings">Earn KSH 1,500/day</div>
+                    <div class="package-badge">VIP</div>
+                </div>
+            </div>
+
+            <div id="depositStatus" class="deposit-status hidden"></div>
+            <div id="depositRequests" class="deposit-requests"></div>
+
+            <div id="depositModal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Confirm Deposit</h3>
+                    <p>Amount: <strong id="selectedAmount">KSH 0</strong></p>
+                    <p>1. Send <strong id="sendAmount">KSH 0</strong> to M-Pesa number <strong>0769261471</strong></p>
+                    <p id="phoneHint">We will request confirmation on your registered mobile number once you submit.</p>
+                    <p>2. Enter the M-Pesa confirmation code below:</p>
+                    <input type="text" id="mpesaCode" placeholder="M-Pesa Transaction Code (e.g., QKJ7H9)" maxlength="10">
+                    <div class="modal-actions">
+                        <button class="btn-secondary" onclick="closeDepositModal()">Cancel</button>
+                        <button class="btn-primary" onclick="confirmDeposit()">I've Sent the Money</button>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Investments Section -->
+        <section id="invest" class="section hidden">
+            <div class="invest-banner">
+                <div>
+                    <p class="section-kicker">Investment Center</p>
+                    <h1 class="section-title">Pick a plan that matches your goals</h1>
+                    <p class="invest-subtitle">Choose from structured packages and track each active investment with confidence.</p>
+                </div>
+                <div class="invest-badge">2-month maturity • daily returns</div>
+            </div>
+
+            <div class="invest-packages" id="investPackages">
+                <div class="package-card" data-amount="2000" data-package="Starter" onclick="investPackage(2000,'Starter','images/package-2000.svg')">
+                    <img class="package-img" src="images/package-2000.svg" alt="KSH 2,000">
+                    <div class="package-amount">KSH 2,000</div>
+                    <div class="package-earnings">Earn KSH 200/day</div>
+                    <div class="package-badge">Starter</div>
+                </div>
+                <div class="package-card" data-amount="5000" data-package="Basic" onclick="investPackage(5000,'Basic','images/package-5000.svg')">
+                    <img class="package-img" src="images/package-5000.svg" alt="KSH 5,000">
+                    <div class="package-amount">KSH 5,000</div>
+                    <div class="package-earnings">Earn KSH 500/day</div>
+                    <div class="package-badge">Basic</div>
+                </div>
+                <div class="package-card" data-amount="8000" data-package="Standard" onclick="investPackage(8000,'Standard','images/package-8000.svg')">
+                    <img class="package-img" src="images/package-8000.svg" alt="KSH 8,000">
+                    <div class="package-amount">KSH 8,000</div>
+                    <div class="package-earnings">Earn KSH 800/day</div>
+                    <div class="package-badge">Standard</div>
+                </div>
+                <div class="package-card" data-amount="12000" data-package="Premium" onclick="investPackage(12000,'Premium','images/package-12000.svg')">
+                    <img class="package-img" src="images/package-12000.svg" alt="KSH 12,000">
+                    <div class="package-amount">KSH 12,000</div>
+                    <div class="package-earnings">Earn KSH 1,200/day</div>
+                    <div class="package-badge">Premium</div>
+                </div>
+                <div class="package-card" data-amount="15000" data-package="VIP" onclick="investPackage(15000,'VIP','images/package-15000.svg')">
+                    <img class="package-img" src="images/package-15000.svg" alt="KSH 15,000">
+                    <div class="package-amount">KSH 15,000</div>
+                    <div class="package-earnings">Earn KSH 1,500/day</div>
+                    <div class="package-badge">VIP</div>
+                </div>
+            </div>
+
+            <h2 style="margin-top:20px">Your Investments</h2>
+            <div id="userInvestments">Loading investments…</div>
+
+            <div id="investModal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Confirm Investment</h3>
+                    <p>Package: <strong id="invPackageName"></strong></p>
+                    <p>Amount: <strong id="invAmount">KSH 0</strong></p>
+                    <p>Maturity: <strong id="invMaturity">--</strong></p>
+                    <div class="modal-actions">
+                        <button class="btn-secondary" onclick="closeInvestModal()">Cancel</button>
+                        <button class="btn-primary" onclick="confirmInvestment()">Invest Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks" class="section hidden">
+            <h1 class="section-title">Complete Tasks to Earn</h1>
+            <p class="tasks-info">Complete all tasks below to unlock your daily earnings!</p>
+            
+            <div class="tasks-container" id="tasksContainer">
+                <!-- Tasks injected by JS -->
+            </div>
+
+            <div id="referralSection" class="referral-section hidden">
+                <h3>Your referral link</h3>
+                <p>Share this link and earn KSH 100 when a friend creates an account using it.</p>
+                <div class="referral-link-card">
+                    <input type="text" id="referralLinkInput" readonly placeholder="Your referral link will appear here">
+                    <button class="btn-secondary" onclick="copyReferralLink()">Copy Link</button>
+                </div>
+            </div>
+            
+            <div class="tasks-summary">
+                <p>Tasks Completed: <span id="tasksCompleted">0</span> / <span id="tasksTotal">4</span></p>
+                <button class="btn-primary btn-large" id="claimBtn" onclick="claimEarnings()" disabled>
+                    Claim Today's Earnings
+                </button>
+            </div>
+        </section>
+
+        <!-- Refer Section -->
+        <section id="refer" class="section hidden">
+            <h1 class="section-title">Refer a Friend</h1>
+            <p class="tasks-info">Share your unique referral link directly to WhatsApp. When your friend signs up and deposits, your reward will automatically be added after admin approval.</p>
+            <div class="referral-page-card">
+                <div class="referral-link-card">
+                    <input type="text" id="referralPageLinkInput" readonly placeholder="Your referral link will appear here">
+                    <button class="btn-secondary" onclick="copyReferralPageLink()">Copy</button>
+                    <button class="btn-primary" onclick="shareReferralWhatsApp()">Share on WhatsApp</button>
+                </div>
+                <p id="referralStatus" class="referral-note">Your referral link will be generated after you login.</p>
+            </div>
+        </section>
+
+        <!-- Withdraw Section -->
+        <section id="withdraw" class="section hidden">
+            <h1 class="section-title">Withdraw Earnings</h1>
+            <div class="withdraw-card">
+                <div class="withdraw-balance">
+                    <span>Available Balance</span>
+                    <strong id="withdrawBalance">KSH 0</strong>
+                </div>
+                <input type="number" id="withdrawAmount" placeholder="Amount to withdraw" min="100">
+                <input type="tel" id="withdrawPhone" placeholder="M-Pesa Number">
+                <button class="btn-primary btn-large" onclick="withdraw()">Request Withdrawal</button>
+                <p class="withdraw-note">Minimum withdrawal: KSH 100. Processing time: 24 hours.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script>
+        window.API_URL = '/api';
+    </script>
+    <script src="script.js?v=3"></script>
+</body>
+</html>

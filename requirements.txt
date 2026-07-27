@@ -1,6 +1,0 @@
-playwright
-werkzeug
-Flask
-flask-cors
-flask-jwt-extended
-gunicorn
