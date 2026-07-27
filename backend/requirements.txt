@@ -3,4 +3,4 @@ werkzeug
 Flask
 flask-cors
 flask-jwt-extended
-gunicor
+gunicorn
