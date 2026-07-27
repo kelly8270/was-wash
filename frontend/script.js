@@ -147,7 +147,7 @@ async function register() {
         }
     } catch (err) {
         console.error('Registration failed', err);
-        showToast('Network error. Please try again.', 'error');
+        showToast('The server is not responding right now. Please try again in a moment.', 'error');
     }
 }
 
@@ -184,7 +184,7 @@ async function login() {
         }
     } catch (err) {
         console.error('Login failed', err);
-        showToast('Network error. Please try again.', 'error');
+        showToast('The server is not responding right now. Please try again in a moment.', 'error');
     }
 }
 
