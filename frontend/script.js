@@ -132,10 +132,14 @@ async function register() {
         });
 
         let result = null;
+        let responseText = '';
         try {
-            result = await res.json();
+            responseText = await res.text();
+            if (responseText) {
+                result = JSON.parse(responseText);
+            }
         } catch {
-            result = { error: 'Server returned an invalid response.' };
+            result = { error: responseText || 'Server returned an invalid response.' };
         }
 
         if (res.ok) {
@@ -165,10 +169,14 @@ async function login() {
         });
 
         let result = null;
+        let responseText = '';
         try {
-            result = await res.json();
+            responseText = await res.text();
+            if (responseText) {
+                result = JSON.parse(responseText);
+            }
         } catch {
-            result = { error: 'Server returned an invalid response.' };
+            result = { error: responseText || 'Server returned an invalid response.' };
         }
 
         if (res.ok) {
