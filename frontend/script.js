@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const DEFAULT_API_URL = 'https://was-washs.onrender.com/api';
+const DEFAULT_API_URL = 'https://was-washs.onrender.com';
 const API_URL = window.API_URL || DEFAULT_API_URL;
 
 // ===== STATE =====
