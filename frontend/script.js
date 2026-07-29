@@ -196,6 +196,28 @@ async function login() {
     }
 }
 
+function attachAuthHandlers() {
+    const loginButton = document.getElementById('loginSubmitBtn');
+    if (loginButton && !loginButton.dataset.authBound) {
+        loginButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            login();
+        });
+        loginButton.dataset.authBound = 'true';
+    }
+
+    const registerButton = document.getElementById('registerSubmitBtn');
+    if (registerButton && !registerButton.dataset.authBound) {
+        registerButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            register();
+        });
+        registerButton.dataset.authBound = 'true';
+    }
+}
+
 function toggleNavLinks(show) {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.style.display = show ? 'inline-flex' : 'none';
@@ -899,6 +921,7 @@ function showToast(message, type = 'info') {
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
     toggleNavLinks(false);
+    attachAuthHandlers();
     initializeReferralQuery();
 
     const savedUser = localStorage.getItem('user');

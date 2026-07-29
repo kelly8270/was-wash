@@ -59,7 +59,7 @@
                 <h2>Welcome Back</h2>
                 <input type="email" id="loginEmail" placeholder="Email" required>
                 <input type="password" id="loginPassword" placeholder="Password" required>
-                <button class="btn-primary" onclick="login()">Login</button>
+                <button id="loginSubmitBtn" class="btn-primary" type="button" onclick="login()">Login</button>
             </div>
             
             <div id="registerForm" class="auth-form hidden">
@@ -92,7 +92,7 @@
                         I agree to the <button type="button" class="link-button" onclick="showTermsModal()">Terms and Conditions</button>
                     </label>
                 </div>
-                <button class="btn-primary" onclick="register()">Register</button>
+                <button id="registerSubmitBtn" class="btn-primary" type="button" onclick="register()">Register</button>
             </div>
         </div>
     </section>
