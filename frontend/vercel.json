@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://was-washs.onrender.com/api/$1"
+    }
+  ]
+}
