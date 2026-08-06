@@ -136,7 +136,11 @@ async function register() {
         try {
             responseText = await res.text();
             if (responseText) {
-                result = JSON.parse(responseText);
+                try {
+                    result = JSON.parse(responseText);
+                } catch {
+                    result = { error: responseText };
+                }
             }
         } catch {
             result = { error: responseText || 'Server returned an invalid response.' };
@@ -173,7 +177,11 @@ async function login() {
         try {
             responseText = await res.text();
             if (responseText) {
-                result = JSON.parse(responseText);
+                try {
+                    result = JSON.parse(responseText);
+                } catch {
+                    result = { error: responseText };
+                }
             }
         } catch {
             result = { error: responseText || 'Server returned an invalid response.' };
