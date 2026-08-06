@@ -218,6 +218,12 @@ function attachAuthHandlers() {
     }
 }
 
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachAuthHandlers);
+} else {
+    attachAuthHandlers();
+}
+
 function toggleNavLinks(show) {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.style.display = show ? 'inline-flex' : 'none';
